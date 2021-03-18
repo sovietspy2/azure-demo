@@ -18,17 +18,6 @@ env:
   IMAGE_NAME: sovietspy2/azure-demo
 
 jobs:
-  artifact:
-    name: Publish Artifact 
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: build docker image
-        run: mvn package -DskipTests
   push:
     # Ensure test job passes before pushing image.
     runs-on: ubuntu-latest
