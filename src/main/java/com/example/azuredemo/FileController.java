@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 @Slf4j
 @Controller
@@ -22,14 +23,16 @@ public class FileController {
     )
     public ResponseEntity<ByteArrayResource> getFile() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("data.txt").getFile());
+        InputStream inputStream = classLoader.getResourceAsStream("data.txt");
 
-        ByteArrayResource resource = new ByteArrayResource(FileUtils.readFileToByteArray(file));
+        assert inputStream != null;
+
+        ByteArrayResource resource = new ByteArrayResource(inputStream.readAllBytes());
 
         log.info("file download starting");
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" +"file.txt")
                 .contentType(MediaType.APPLICATION_OCTET_STREAM) //
                 .contentLength(resource.contentLength()) //
                 .body(resource);
