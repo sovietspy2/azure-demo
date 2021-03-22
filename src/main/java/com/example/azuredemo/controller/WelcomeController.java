@@ -1,4 +1,4 @@
-package com.example.azuredemo;
+package com.example.azuredemo.controller;
 
 import com.example.azuredemo.model.Test;
 import com.example.azuredemo.repository.TestRepository;
@@ -33,10 +33,16 @@ public class WelcomeController {
     }
 
     @GetMapping("/load")
-    public Test test(@RequestParam Integer id) {
+    public Test load(@RequestParam Integer id) {
         Test test = testRepository.findById(id).get();
         return test;
 
+    }
+
+    @GetMapping("/v2/load")
+    public Test load(@RequestParam String name) {
+        Test test = testRepository.findWithCustomQuery(name).get();
+        return test;
     }
 
     @GetMapping("/save")

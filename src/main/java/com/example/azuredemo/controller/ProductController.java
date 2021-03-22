@@ -1,4 +1,4 @@
-package com.example.azuredemo;
+package com.example.azuredemo.controller;
 
 import com.example.azuredemo.model.ProductCategory;
 import com.example.azuredemo.repository.ProductCategoryRepository;

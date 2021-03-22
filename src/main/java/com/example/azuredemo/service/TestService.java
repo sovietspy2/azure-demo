@@ -18,8 +18,14 @@ public class TestService {
     @Transactional
     public void testSave(Test test) {
         testRepository.save(test);
+    }
+
+    @Transactional
+    public void testSaveRollback(Test test) {
+        testRepository.save(test);
 
         throw new DataIntegrityViolationException("Throwing exception for demoing Rollback!!!");
     }
+
 
 }
